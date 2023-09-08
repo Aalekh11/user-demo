@@ -1,25 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { createContext, useContext } from 'react';
+import { BrowserRouter } from "react-router-dom";
+import Sidebar from "./Components/Sidebar/Sidebar";
+import Header from "./Components/Header";
+import DefinedRoutes from "./routes";
+
+export const ThemeContext = createContext(1);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <BrowserRouter>
+    <ThemeContext.Provider value={Math.floor(Math.random() * 10)}>
+    <div style={{ display: "flex", flexDirection: "row" }}>
+      <Sidebar />
+      <div style={{ width: "100%" }}>
+        <Header />
+        <DefinedRoutes/>
+      </div>
     </div>
+    </ThemeContext.Provider>
+    </BrowserRouter>
   );
 }
 
