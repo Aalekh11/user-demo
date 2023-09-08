@@ -23,7 +23,7 @@ function EditBlog() {
 
   useEffect(() => {
     fetchData();
-  },[0]);
+  }, [0]);
 
   const fetchData = () => {
     axios
@@ -55,7 +55,11 @@ function EditBlog() {
   }, [cardItem]);
 
   const handleChange = (e: any) => {
-    setFormValues({ title: e.target.value, body: "" });
+    setFormValues({ ...formValues, title: e.target.value });
+  };
+
+  const handleTextArea = (e: any) => {
+    setFormValues({ ...formValues, body: e.target.value });
   };
 
   return (
@@ -123,7 +127,7 @@ function EditBlog() {
                   style={{ width: "20rem", height: "10rem" }}
                   defaultValue={cardItem?.[0]?.body}
                   value={formValues.body}
-                  onChange={handleChange}
+                  onChange={handleTextArea}
                 />
               )}
             </div>
@@ -141,7 +145,11 @@ function EditBlog() {
               Edit
             </Button>
             <Button type="primary">Delete</Button>
-            {editable && <Button type="primary"onClick={handleEdit}>Cancel</Button>}
+            {editable && (
+              <Button type="primary" onClick={handleEdit}>
+                Cancel
+              </Button>
+            )}
           </div>
         </div>
       </div>
